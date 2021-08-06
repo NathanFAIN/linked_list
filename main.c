@@ -34,11 +34,13 @@ linked_list_t *pop_node(linked_list_t **list) {
 }
 
 char *pop_unique_node(linked_list_t **list) {
+    linked_list_t *node = *list;
     static char date[64];
 
     if (*list != NULL) {
         memcpy(date, (*list)->data, sizeof(date));
         *list = (*list)->next;
+        free(node);
         return (date);
     }
     return (NULL);
@@ -70,7 +72,7 @@ int main(void) {
     linked_list_t *list = NULL;
 
     push_node(&list, create_node("test", 5));
-    // printf("%s\n", pop_node(&list)->data);
+    printf("%s\n", pop_unique_node(&list));
 
     destroy_list(&list);
     return (0);
