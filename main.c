@@ -34,7 +34,7 @@ linked_list_t *pop_node(linked_list_t **list) {
 }
 
 char *pop_unique_node(linked_list_t **list) {
-    char date[64];
+    static char date[64];
 
     if (*list != NULL) {
         memcpy(date, (*list)->data, sizeof(date));
