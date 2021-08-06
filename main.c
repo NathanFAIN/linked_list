@@ -3,6 +3,10 @@
 linked_list_t *create_node(char *data, unsigned int size) {
     linked_list_t *node =   malloc(sizeof(*node));
 
+    if (node == NULL || size > sizeof(node->data)) {
+        exit (84);
+    }
+    memset(node->data + size, 0, sizeof(node->data) - size);
     memcpy(node->data, data, size);
     node->next = NULL;
     return (node);
@@ -27,6 +31,17 @@ linked_list_t *pop_node(linked_list_t **list) {
         *list = (*list)->next;
     }
     return (node);
+}
+
+char *pop_unique_node(linked_list_t **list) {
+    char date[64];
+
+    if (*list != NULL) {
+        memcpy(date, (*list)->data, sizeof(date));
+        *list = (*list)->next;
+        return (date);
+    }
+    return (NULL);
 }
 
 unsigned int list_size(linked_list_t *list) {
